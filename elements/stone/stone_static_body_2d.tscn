@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://5p547rrgn840"]
+
+[ext_resource type="Script" uid="uid://dkxblnrwa7p7w" path="res://elements/stone/stone_static_body_2d.gd" id="1_qi847"]
+[ext_resource type="Texture2D" uid="uid://cn80wniot3v44" path="res://assets/textures/stone.png" id="1_vu5dg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qi847"]
+size = Vector2(16, 16)
+
+[node name="StoneStaticBody2D" type="StaticBody2D"]
+script = ExtResource("1_qi847")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qi847")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vu5dg")

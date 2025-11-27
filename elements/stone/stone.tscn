@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://yg7aekry5p1v"]
+
+[ext_resource type="Texture2D" uid="uid://cn80wniot3v44" path="res://assets/textures/stone.png" id="1_a11jd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_066fo"]
+size = Vector2(16, 16)
+
+[node name="Stone" type="RigidBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_066fo")
+debug_color = Color(0.61348236, 0.35994282, 1, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_a11jd")

@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://bqkr5wm0x32gl"]
+
+[ext_resource type="Texture2D" uid="uid://dnkintpbu1lmk" path="res://assets/textures/blue-tile-16.png" id="1_ktrpi"]
+[ext_resource type="Script" uid="uid://db12sy74xyoyb" path="res://elements/player/player.gd" id="1_lh3fu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lh3fu"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lh3fu"]
+atlas = ExtResource("1_ktrpi")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgvkd"]
+atlas = ExtResource("1_ktrpi")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_338lt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lh3fu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgvkd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_lh3fu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lh3fu")
+debug_color = Color(0.62240785, 0.53375584, 0, 0.41960785)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(5.9604645e-07, 0)
+sprite_frames = SubResource("SpriteFrames_338lt")
+animation = &"idle"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.80953944
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
