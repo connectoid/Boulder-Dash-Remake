@@ -59,22 +59,25 @@ func comape_lists(source_list, dest_list):
 
 
 func can_rolldown(pos):
-	print('Start can falldown')
 	var denied_colliders_list = ['StaticBody2D', 'TileMapLayer', 'CharacterBody2D']
 	var pos_below_aside_left = Vector2(pos.x - TILE_SIZE.x, pos.y + TILE_SIZE.y)
 	var pos_below_aside_right = Vector2(pos.x + TILE_SIZE.x, pos.y + TILE_SIZE.y)
 	var pos_below = Vector2(pos.x, pos.y + TILE_SIZE.y)
+	var pos_aside_left = Vector2(pos.x - TILE_SIZE.x, pos.y)
+	var pos_aside_right = Vector2(pos.x + TILE_SIZE.x, pos.y)
 	var collisions_below_aside_left = get_objects_in_pos(pos_below_aside_left)
 	var collisions_below_aside_right = get_objects_in_pos(pos_below_aside_right)
 	var collisions_below = get_objects_in_pos(pos_below)
+	var collisions_aside_left = get_objects_in_pos(pos_aside_left)
+	var collisions_aside_right = get_objects_in_pos(pos_aside_right)
 	var is_empty_below_aside_left = not comape_lists(collisions_below_aside_left, denied_colliders_list)
 	var is_empty_below_aside_right = not comape_lists(collisions_below_aside_right, denied_colliders_list)
 	var is_stone_below = comape_lists(collisions_below, ['StaticBody2D'])
-	#print('Is stone below: ', is_stone_below)
-	#print('Is empty below aside: ', is_empty_below_aside)
-	if is_empty_below_aside_left && is_stone_below:
+	var is_player_aside_left = comape_lists(collisions_aside_left, ['CharacterBody2D', 'TileMapLayer'])
+	var is_player_aside_right = comape_lists(collisions_aside_right, ['CharacterBody2D', 'TileMapLayer'])
+	if is_empty_below_aside_left && is_stone_below && not is_player_aside_left:
 		return 'left'
-	elif is_empty_below_aside_right && is_stone_below:
+	elif is_empty_below_aside_right && is_stone_below && not is_player_aside_right:
 		return 'right'
 	return 'no'
 
