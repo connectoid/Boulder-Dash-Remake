@@ -1081,164 +1081,44 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAIAAgAAAAAAAEAAAAIAAgAAAAAAAIAAAAIAAg
 tile_set = SubResource("TileSet_gvrwa")
 
 [node name="GroundTileLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAAEAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAAQAAQAAAAAAAAAAAAUAAQAAAAAAAAAAAAYAAQAAAAAAAAAAAAcAAQAAAAAAAAABAAEAAQAAAAAAAAABAAIAAQAAAAAAAAABAAMAAQAAAAAAAAABAAQAAQAAAAAAAAABAAUAAQAAAAAAAAABAAYAAQAAAAAAAAABAAcAAQAAAAAAAAACAAUAAQAAAAAAAAACAAYAAQAAAAAAAAACAAcAAQAAAAAAAAADAAUAAQAAAAAAAAADAAYAAQAAAAAAAAADAAcAAQAAAAAAAAAEAAUAAQAAAAAAAAAEAAYAAQAAAAAAAAAEAAcAAQAAAAAAAAAFAAcAAQAAAAAAAAAGAAUAAQAAAAAAAAAGAAYAAQAAAAAAAAAGAAcAAQAAAAAAAAAHAAUAAQAAAAAAAAAHAAYAAQAAAAAAAAAHAAcAAQAAAAAAAAAIAAEAAQAAAAAAAAAIAAUAAQAAAAAAAAAIAAYAAQAAAAAAAAAIAAcAAQAAAAAAAAAJAAEAAQAAAAAAAAAJAAUAAQAAAAAAAAAJAAYAAQAAAAAAAAAJAAcAAQAAAAAAAAAKAAEAAQAAAAAAAAAKAAUAAQAAAAAAAAAKAAYAAQAAAAAAAAAKAAcAAQAAAAAAAAALAAEAAQAAAAAAAAALAAYAAQAAAAAAAAALAAcAAQAAAAAAAAAMAAEAAQAAAAAAAAAMAAYAAQAAAAAAAAAMAAcAAQAAAAAAAAANAAEAAQAAAAAAAAANAAYAAQAAAAAAAAANAAcAAQAAAAAAAAAOAAEAAQAAAAAAAAAOAAIAAQAAAAAAAAAOAAMAAQAAAAAAAAAOAAQAAQAAAAAAAAAOAAUAAQAAAAAAAAAOAAYAAQAAAAAAAAAOAAcAAQAAAAAAAAAPAAEAAQAAAAAAAAAPAAIAAQAAAAAAAAAPAAMAAQAAAAAAAAAPAAQAAQAAAAAAAAAPAAUAAQAAAAAAAAAPAAYAAQAAAAAAAAAPAAcAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAAFAAUAAQAAAAAAAAAFAAYAAQAAAAAAAAALAAUAAQAAAAAAAAAMAAUAAQAAAAAAAAANAAAAAQAAAAAAAAANAAIAAQAAAAAAAAANAAMAAQAAAAAAAAANAAQAAQAAAAAAAAANAAUAAQAAAAAAAAAOAAAAAQAAAAAAAAAPAAAAAQAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAMAAQAAAAAAAAAAAAQAAQAAAAAAAAAAAAUAAQAAAAAAAAAAAAYAAQAAAAAAAAAAAAcAAQAAAAAAAAABAAcAAQAAAAAAAAALAAEAAQAAAAAAAAAMAAEAAQAAAAAAAAANAAEAAQAAAAAAAAAOAAEAAQAAAAAAAAAOAAIAAQAAAAAAAAAOAAMAAQAAAAAAAAAOAAQAAQAAAAAAAAAOAAUAAQAAAAAAAAAOAAYAAQAAAAAAAAAOAAcAAQAAAAAAAAAPAAEAAQAAAAAAAAAPAAIAAQAAAAAAAAAPAAMAAQAAAAAAAAAPAAQAAQAAAAAAAAAPAAUAAQAAAAAAAAAPAAYAAQAAAAAAAAAPAAcAAQAAAAAAAAANAAAAAQAAAAAAAAANAAIAAQAAAAAAAAAOAAAAAQAAAAAAAAAPAAAAAQAAAAAAAAAGAAMAAQAAAAAAAAAEAAMAAQAAAAAAAAADAAMAAQAAAAAAAAACAAMAAQAAAAAAAAABAAMAAQAAAAAAAAAHAAMAAQAAAAAAAAAIAAMAAQAAAAAAAAAJAAMAAQAAAAAAAAAFAAQAAQAAAAAAAAADAAAAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQAAAAAAAAAHAAAAAQAAAAAAAAAHAAEAAQAAAAAAAAAHAAIAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_rdllr")
 
 [node name="Player" parent="." instance=ExtResource("2_qwlob")]
 position = Vector2(8, 120)
 
 [node name="StoneStaticBody2D" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(88, 8)
+position = Vector2(88, 120)
 
 [node name="StoneStaticBody2D2" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(104, 8)
-
-[node name="StoneStaticBody2D4" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(72, 8)
-
-[node name="StoneStaticBody2D5" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(56, 8)
-
-[node name="StoneStaticBody2D6" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(40, 8)
-
-[node name="StoneStaticBody2D7" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(40, 24)
-
-[node name="StoneStaticBody2D8" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(56, 24)
-
-[node name="StoneStaticBody2D9" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(72, 24)
-
-[node name="StoneStaticBody2D10" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(88, 24)
-
-[node name="StoneStaticBody2D11" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(104, 24)
-
-[node name="StoneStaticBody2D12" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(120, 8)
-
-[node name="StoneStaticBody2D13" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(136, 8)
-
-[node name="StoneStaticBody2D14" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(152, 8)
-
-[node name="StoneStaticBody2D15" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(168, 8)
-
-[node name="StoneStaticBody2D16" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(184, 8)
-
-[node name="StoneStaticBody2D17" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(200, 8)
-
-[node name="StoneStaticBody2D18" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(200, 8)
-
-[node name="StoneStaticBody2D19" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(120, 24)
-
-[node name="StoneStaticBody2D20" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(120, 40)
-
-[node name="StoneStaticBody2D21" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(104, 40)
-
-[node name="StoneStaticBody2D22" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
 position = Vector2(88, 40)
 
-[node name="StoneStaticBody2D23" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(72, 40)
+[node name="StoneStaticBody2D3" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
+position = Vector2(88, 24)
 
-[node name="StoneStaticBody2D24" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(56, 40)
-
-[node name="StoneStaticBody2D25" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(40, 40)
-
-[node name="StoneStaticBody2D26" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(40, 56)
-
-[node name="StoneStaticBody2D27" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(56, 56)
-
-[node name="StoneStaticBody2D28" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(72, 56)
-
-[node name="StoneStaticBody2D29" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
+[node name="StoneStaticBody2D4" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
 position = Vector2(88, 56)
 
-[node name="StoneStaticBody2D30" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(104, 56)
+[node name="StoneStaticBody2D5" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
+position = Vector2(72, 40)
 
-[node name="StoneStaticBody2D31" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(120, 56)
+[node name="StoneStaticBody2D6" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
+position = Vector2(104, 40)
 
-[node name="StoneStaticBody2D32" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(136, 56)
+[node name="StoneStaticBody2D7" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
+position = Vector2(104, 24)
 
-[node name="StoneStaticBody2D33" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(136, 40)
+[node name="StoneStaticBody2D8" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
+position = Vector2(72, 24)
 
-[node name="StoneStaticBody2D34" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(152, 40)
+[node name="StoneStaticBody2D9" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
+position = Vector2(72, 8)
 
-[node name="StoneStaticBody2D35" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(152, 56)
+[node name="StoneStaticBody2D10" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
+position = Vector2(88, 8)
 
-[node name="StoneStaticBody2D36" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(168, 56)
+[node name="StoneStaticBody2D11" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
+position = Vector2(104, 8)
 
-[node name="StoneStaticBody2D37" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(168, 40)
-
-[node name="StoneStaticBody2D38" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(184, 40)
-
-[node name="StoneStaticBody2D39" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(184, 56)
-
-[node name="StoneStaticBody2D40" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(200, 56)
-
-[node name="StoneStaticBody2D41" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(200, 40)
-
-[node name="StoneStaticBody2D42" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(200, 72)
-
-[node name="StoneStaticBody2D43" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(184, 72)
-
-[node name="StoneStaticBody2D44" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(168, 72)
-
-[node name="StoneStaticBody2D45" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(152, 72)
-
-[node name="StoneStaticBody2D46" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(136, 72)
-
-[node name="StoneStaticBody2D47" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(120, 72)
-
-[node name="StoneStaticBody2D48" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(104, 72)
-
-[node name="StoneStaticBody2D49" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(88, 72)
-
-[node name="StoneStaticBody2D50" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(72, 72)
-
-[node name="StoneStaticBody2D51" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(56, 72)
-
-[node name="StoneStaticBody2D52" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(40, 72)
-
-[node name="StoneStaticBody2D53" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
-position = Vector2(40, 72)
+[node name="StoneStaticBody2D12" parent="." groups=["stones"] instance=ExtResource("6_rs4mt")]
+position = Vector2(104, 8)
