@@ -63,7 +63,8 @@ func _physics_process(delta):
 	
 	# Если есть ненулевое направление, пытаемся двинуть персонажа
 	if final_direction.length_squared() > 0:
-		if not move_timer.is_stopped(): return  # Игнорируем повторные команды пока таймер запущен
+		if not move_timer.is_stopped(): 
+			return  # Игнорируем повторные команды пока таймер запущен
 		# Проверяем границы экрана перед движением
 		var new_position = position + final_direction.normalized() * TILE_SIZE
 		if is_valid_position(new_position):

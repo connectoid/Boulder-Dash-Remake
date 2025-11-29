@@ -3,10 +3,19 @@ extends StaticBody2D
 
 const TILE_SIZE = Vector2(16, 16)
 var window_size = Vector2.ZERO
+var falling_timer = Timer.new()
+var rolling_timer = Timer.new()
+var FALLING_INTERVAL = 0.5
+
 
 func _ready():
 	update_window_size()
-	
+	add_child(falling_timer)
+	falling_timer.wait_time = FALLING_INTERVAL
+	falling_timer.connect("timeout", _on_timer_timeout)
+	rolling_timer.wait_time = FALLING_INTERVAL
+	rolling_timer.connect("timeout", _on_timer_timeout)
+
 	
 
 func update_window_size():
@@ -19,30 +28,42 @@ func _process(delta):
 	var horizontal_dir = Vector2.ZERO
 	vertical_dir.y = 1
 	horizontal_dir.x = -1
-	var final_direction = vertical_dir
 	var new_position = position + vertical_dir.normalized() * TILE_SIZE
 	#if vertical_dir.length_squared() > 0 && is_valid_position(new_position):
 	if is_no_colliders(new_position) && is_no_walls(new_position):
+
 		vertical_dir.y += 1
 		new_position = position + vertical_dir.normalized() * TILE_SIZE
-		print('Changing position by falling')
-		position = new_position
+		if not falling_timer.is_stopped(): 
+			return 
+
+		try_move(new_position)
+		#position = new_position
 	if not is_no_colliders(position) && is_no_walls(position):
 		if can_rolldown(position) == 'left':
+			if not falling_timer.is_stopped(): 
+				return 
 			new_position = position + horizontal_dir.normalized() * TILE_SIZE
 			position = new_position
-		elif can_rolldown(position) == 'right': 
+			falling_timer.start()
+		elif can_rolldown(position) == 'right':
+			if not falling_timer.is_stopped(): 
+				return 
 			new_position = position - horizontal_dir.normalized() * TILE_SIZE
-			print('Changing position by rolling')
 			position = new_position
+			falling_timer.start()
 
-	#try_move(final_direction)
 	
+func try_move(new_position):
+	# Пробуем двигать персонажа с учётом столкновений
+	#var collision_result = move_and_collide(dir)
+	position = new_position
+	falling_timer.start()
+
 
 func move_stone(dir):
 	print('moving stone to the ', dir)
 	var horizontal_dir = Vector2.ZERO
-	var final_direction = horizontal_dir
 	var new_position = position
 
 	if dir == 'left':
@@ -60,10 +81,6 @@ func move_stone(dir):
 	print('No colliders: ', no_colliders)
 	print('No walls: ', no_walls)
 	if no_colliders &&  no_walls:
-		#if dir == 'left':
-			#new_position = position - horizontal_dir.normalized() * TILE_SIZE
-		#elif dir == ' right':
-			#new_position = position + horizontal_dir.normalized() * TILE_SIZE
 		print('Changing position by pushing')
 		position = new_position
 	else:
@@ -103,14 +120,15 @@ func can_rolldown(pos):
 	var collisions_below = get_objects_in_pos(pos_below)
 	var collisions_aside_left = get_objects_in_pos(pos_aside_left)
 	var collisions_aside_right = get_objects_in_pos(pos_aside_right)
+	
 	var is_empty_below_aside_left = not comape_lists(collisions_below_aside_left, denied_colliders_list)
 	var is_empty_below_aside_right = not comape_lists(collisions_below_aside_right, denied_colliders_list)
 	var is_stone_below = comape_lists(collisions_below, ['StaticBody2D'])
 	var is_player_aside_left = comape_lists(collisions_aside_left, ['CharacterBody2D', 'TileMapLayer'])
 	var is_player_aside_right = comape_lists(collisions_aside_right, ['CharacterBody2D', 'TileMapLayer'])
-	if is_empty_below_aside_left && is_stone_below && not is_player_aside_left:
+	if is_empty_below_aside_left && is_stone_below && not is_player_aside_left && is_no_walls(pos_below_aside_left):
 		return 'left'
-	elif is_empty_below_aside_right && is_stone_below && not is_player_aside_right:
+	elif is_empty_below_aside_right && is_stone_below && not is_player_aside_right && is_no_walls(pos_below_aside_right):
 		return 'right'
 	return 'no'
 
@@ -123,12 +141,9 @@ func is_no_colliders(pos):
 func is_no_walls(pos):
 	var is_valid = pos.x >= 0 && pos.x <= window_size.x && pos.y >= 0 && pos.y <= window_size.y
 	return is_valid
+	
 
-func try_move(dir):
-	# Масштабируем направление на размер тайла
-	dir = dir.normalized() * TILE_SIZE
 	
-	# Пробуем двигать персонажа с учётом столкновений
-	var collision_result = move_and_collide(dir)
-	
-	# Если нет результата столкновения, считаем ход завершённым
+func _on_timer_timeout():
+	falling_timer.stop()
+	rolling_timer.stop()
