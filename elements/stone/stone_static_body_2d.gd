@@ -5,7 +5,7 @@ const TILE_SIZE = Vector2(16, 16)
 var window_size = Vector2.ZERO
 var falling_timer = Timer.new()
 var rolling_timer = Timer.new()
-var FALLING_INTERVAL = 0.5
+var FALLING_INTERVAL = 0.25
 
 
 func _ready():
@@ -29,38 +29,28 @@ func _process(delta):
 	vertical_dir.y = 1
 	horizontal_dir.x = -1
 	var new_position = position + vertical_dir.normalized() * TILE_SIZE
-	#if vertical_dir.length_squared() > 0 && is_valid_position(new_position):
 	if is_no_colliders(new_position) && is_no_walls(new_position):
-
-		vertical_dir.y += 1
-		new_position = position + vertical_dir.normalized() * TILE_SIZE
 		if not falling_timer.is_stopped(): 
 			return 
-
-		try_move(new_position)
-		#position = new_position
+		vertical_dir.y += 1
+		new_position = position + vertical_dir.normalized() * TILE_SIZE
+		position = new_position
+		falling_timer.start()
 	if not is_no_colliders(position) && is_no_walls(position):
 		if can_rolldown(position) == 'left':
-			if not falling_timer.is_stopped(): 
+			if not rolling_timer.is_stopped(): 
 				return 
 			new_position = position + horizontal_dir.normalized() * TILE_SIZE
 			position = new_position
-			falling_timer.start()
+			rolling_timer.start()
 		elif can_rolldown(position) == 'right':
-			if not falling_timer.is_stopped(): 
+			if not rolling_timer.is_stopped(): 
 				return 
 			new_position = position - horizontal_dir.normalized() * TILE_SIZE
 			position = new_position
-			falling_timer.start()
+			rolling_timer.start()
 
 	
-func try_move(new_position):
-	# Пробуем двигать персонажа с учётом столкновений
-	#var collision_result = move_and_collide(dir)
-	position = new_position
-	falling_timer.start()
-
-
 func move_stone(dir):
 	print('moving stone to the ', dir)
 	var horizontal_dir = Vector2.ZERO
@@ -135,7 +125,11 @@ func can_rolldown(pos):
 func is_no_colliders(pos):
 	var denied_colliders_list = ['StaticBody2D', 'TileMapLayer', 'CharacterBody2D']
 	var colliders_list = get_objects_in_pos(pos)
-	return not comape_lists(colliders_list, denied_colliders_list)
+	var is_colliders = comape_lists(colliders_list, denied_colliders_list)
+	if is_colliders:
+		falling_timer.start()
+		
+	return not is_colliders
 
 
 func is_no_walls(pos):
