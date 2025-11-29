@@ -68,7 +68,21 @@ func _physics_process(delta):
 		var new_position = position + final_direction.normalized() * TILE_SIZE
 		if is_valid_position(new_position):
 			try_move(final_direction)
+		if final_direction == Vector2(-1.0, 0.0):
+			var collision_left = get_objects_in_pos(new_position)
+			var collisionn_left = get_objectss_in_pos(new_position)
+			if collision_left.has('StaticBody2D'):
+				push_stone('left', collisionn_left[0].collider)
+		if final_direction == Vector2(1.0, 0.0):
+			var collision_right = get_objects_in_pos(new_position)
+			var collisionn_right = get_objectss_in_pos(new_position)
+			if collision_right.has('StaticBody2D'):
+				push_stone('right', collisionn_right[0].collider)
 
+
+func push_stone(dir, object):
+	object.move_stone(dir)
+	#object.position.x = object.position.x - TILE_SIZE.x
 		
 func get_objects_in_pos(pos):
 	var direct_space_state = get_world_2d().direct_space_state
@@ -79,6 +93,15 @@ func get_objects_in_pos(pos):
 	for object in objects:
 		results.append(object.collider.get_class())
 	return results
+	
+		
+func get_objectss_in_pos(pos):
+	var direct_space_state = get_world_2d().direct_space_state
+	var point_query = PhysicsPointQueryParameters2D.new()
+	point_query.position = pos
+	var objects = direct_space_state.intersect_point(point_query)
+	var results = []
+	return objects
 	
 		
 func is_valid_position(pos):

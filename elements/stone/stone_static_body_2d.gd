@@ -25,6 +25,7 @@ func _process(delta):
 	if is_no_colliders(new_position) && is_no_walls(new_position):
 		vertical_dir.y += 1
 		new_position = position + vertical_dir.normalized() * TILE_SIZE
+		print('Changing position by falling')
 		position = new_position
 	if not is_no_colliders(position) && is_no_walls(position):
 		if can_rolldown(position) == 'left':
@@ -32,9 +33,41 @@ func _process(delta):
 			position = new_position
 		elif can_rolldown(position) == 'right': 
 			new_position = position - horizontal_dir.normalized() * TILE_SIZE
+			print('Changing position by rolling')
 			position = new_position
 
 	#try_move(final_direction)
+	
+
+func move_stone(dir):
+	print('moving stone to the ', dir)
+	var horizontal_dir = Vector2.ZERO
+	var final_direction = horizontal_dir
+	var new_position = position
+
+	if dir == 'left':
+		horizontal_dir.x = -1
+		new_position = position + horizontal_dir.normalized() * TILE_SIZE
+		print('New pushing position: ', new_position)
+		print('Old pushing position: ', position)
+	elif dir == 'right':
+		horizontal_dir.x = 1
+		new_position = position + horizontal_dir.normalized() * TILE_SIZE
+		print('New pushing position: ', new_position)
+		print('Old pushing position: ', position)
+	var no_colliders = is_no_colliders(new_position)
+	var no_walls = is_no_walls(new_position)
+	print('No colliders: ', no_colliders)
+	print('No walls: ', no_walls)
+	if no_colliders &&  no_walls:
+		#if dir == 'left':
+			#new_position = position - horizontal_dir.normalized() * TILE_SIZE
+		#elif dir == ' right':
+			#new_position = position + horizontal_dir.normalized() * TILE_SIZE
+		print('Changing position by pushing')
+		position = new_position
+	else:
+		print('Some obstacle')
 
 
 func get_objects_in_pos(pos):
