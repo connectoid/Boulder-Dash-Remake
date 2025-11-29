@@ -6,6 +6,11 @@ var window_size = Vector2.ZERO
 var falling_timer = Timer.new()
 var rolling_timer = Timer.new()
 var FALLING_INTERVAL = 0.25
+var all_colliders_list = ['StaticBody2D', 'TileMapLayer', 'CharacterBody2D']
+var denied_colliders_list = ['StaticBody2D', 'TileMapLayer']
+var player_collider = ['CharacterBody2D']
+var stone_is_falling = false
+
 
 
 func _ready():
@@ -29,14 +34,23 @@ func _process(delta):
 	vertical_dir.y = 1
 	horizontal_dir.x = -1
 	var new_position = position + vertical_dir.normalized() * TILE_SIZE
-	if is_no_colliders(new_position) && is_no_walls(new_position):
+	
+	if is_no_colliders(new_position, denied_colliders_list) && is_no_walls(new_position):
+		var previos_upper_position = Vector2(position.x, position.y - TILE_SIZE.y)
+		if not is_no_colliders(new_position, player_collider) and stone_is_falling:
+			kill_object($"../Player")
+		
 		if not falling_timer.is_stopped(): 
 			return 
 		vertical_dir.y += 1
 		new_position = position + vertical_dir.normalized() * TILE_SIZE
+		stone_is_falling = true
 		position = new_position
 		falling_timer.start()
-	if not is_no_colliders(position) && is_no_walls(position):
+	else:
+		stone_is_falling = false
+
+	if not is_no_colliders(position, all_colliders_list) && is_no_walls(position):
 		if can_rolldown(position) == 'left':
 			if not rolling_timer.is_stopped(): 
 				return 
@@ -49,6 +63,10 @@ func _process(delta):
 			new_position = position - horizontal_dir.normalized() * TILE_SIZE
 			position = new_position
 			rolling_timer.start()
+
+func kill_object(object):
+	print('Kill!!!')
+	object.die_and_explode()
 
 	
 func move_stone(dir):
@@ -66,7 +84,7 @@ func move_stone(dir):
 		new_position = position + horizontal_dir.normalized() * TILE_SIZE
 		print('New pushing position: ', new_position)
 		print('Old pushing position: ', position)
-	var no_colliders = is_no_colliders(new_position)
+	var no_colliders = is_no_colliders(new_position, denied_colliders_list)
 	var no_walls = is_no_walls(new_position)
 	print('No colliders: ', no_colliders)
 	print('No walls: ', no_walls)
@@ -99,7 +117,6 @@ func comape_lists(source_list, dest_list):
 
 
 func can_rolldown(pos):
-	var denied_colliders_list = ['StaticBody2D', 'TileMapLayer', 'CharacterBody2D']
 	var pos_below_aside_left = Vector2(pos.x - TILE_SIZE.x, pos.y + TILE_SIZE.y)
 	var pos_below_aside_right = Vector2(pos.x + TILE_SIZE.x, pos.y + TILE_SIZE.y)
 	var pos_below = Vector2(pos.x, pos.y + TILE_SIZE.y)
@@ -111,8 +128,8 @@ func can_rolldown(pos):
 	var collisions_aside_left = get_objects_in_pos(pos_aside_left)
 	var collisions_aside_right = get_objects_in_pos(pos_aside_right)
 	
-	var is_empty_below_aside_left = not comape_lists(collisions_below_aside_left, denied_colliders_list)
-	var is_empty_below_aside_right = not comape_lists(collisions_below_aside_right, denied_colliders_list)
+	var is_empty_below_aside_left = not comape_lists(collisions_below_aside_left, all_colliders_list)
+	var is_empty_below_aside_right = not comape_lists(collisions_below_aside_right, all_colliders_list)
 	var is_stone_below = comape_lists(collisions_below, ['StaticBody2D'])
 	var is_player_aside_left = comape_lists(collisions_aside_left, ['CharacterBody2D', 'TileMapLayer'])
 	var is_player_aside_right = comape_lists(collisions_aside_right, ['CharacterBody2D', 'TileMapLayer'])
@@ -122,10 +139,9 @@ func can_rolldown(pos):
 		return 'right'
 	return 'no'
 
-func is_no_colliders(pos):
-	var denied_colliders_list = ['StaticBody2D', 'TileMapLayer', 'CharacterBody2D']
+func is_no_colliders(pos, list):
 	var colliders_list = get_objects_in_pos(pos)
-	var is_colliders = comape_lists(colliders_list, denied_colliders_list)
+	var is_colliders = comape_lists(colliders_list, list)
 	if is_colliders:
 		falling_timer.start()
 		

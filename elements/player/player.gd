@@ -79,7 +79,15 @@ func _physics_process(delta):
 			var collisionn_right = get_objectss_in_pos(new_position)
 			if collision_right.has('StaticBody2D'):
 				push_stone('right', collisionn_right[0].collider)
+				
 
+
+func die_and_explode():
+	print('BOOOOM!')
+	velocity = Vector2.ZERO
+	$CollisionShape2D.set_deferred('disabled', true)
+	queue_free()
+	
 
 func push_stone(dir, object):
 	object.move_stone(dir)
