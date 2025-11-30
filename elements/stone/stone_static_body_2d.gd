@@ -65,7 +65,8 @@ func _process(delta):
 				new_position = position - horizontal_dir.normalized() * TILE_SIZE
 				position = new_position
 				rolling_timer.start()
-				
+	else:
+		rolling_timer.start()			
 
 func kill_object(object):
 	print('Kill!!!')
