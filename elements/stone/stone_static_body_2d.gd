@@ -18,8 +18,10 @@ func _ready():
 	add_child(falling_timer)
 	falling_timer.wait_time = FALLING_INTERVAL
 	falling_timer.connect("timeout", _on_timer_timeout)
+	add_child(rolling_timer)
 	rolling_timer.wait_time = FALLING_INTERVAL
 	rolling_timer.connect("timeout", _on_timer_timeout)
+	
 
 	
 
@@ -29,6 +31,7 @@ func update_window_size():
 
 
 func _process(delta):
+	
 	var vertical_dir = Vector2.ZERO
 	var horizontal_dir = Vector2.ZERO
 	vertical_dir.y = 1
@@ -52,17 +55,17 @@ func _process(delta):
 
 	if not is_no_colliders(position, all_colliders_list) && is_no_walls(position):
 		if can_rolldown(position) == 'left':
-			if not rolling_timer.is_stopped(): 
-				return 
-			new_position = position + horizontal_dir.normalized() * TILE_SIZE
-			position = new_position
-			rolling_timer.start()
+			if rolling_timer.is_stopped(): 
+				new_position = position + horizontal_dir.normalized() * TILE_SIZE
+				position = new_position
+				rolling_timer.start()
+
 		elif can_rolldown(position) == 'right':
-			if not rolling_timer.is_stopped(): 
-				return 
-			new_position = position - horizontal_dir.normalized() * TILE_SIZE
-			position = new_position
-			rolling_timer.start()
+			if rolling_timer.is_stopped(): 
+				new_position = position - horizontal_dir.normalized() * TILE_SIZE
+				position = new_position
+				rolling_timer.start()
+				
 
 func kill_object(object):
 	print('Kill!!!')
@@ -137,6 +140,7 @@ func can_rolldown(pos):
 		return 'left'
 	elif is_empty_below_aside_right && is_stone_below && not is_player_aside_right && is_no_walls(pos_below_aside_right):
 		return 'right'
+	rolling_timer.start()	
 	return 'no'
 
 func is_no_colliders(pos, list):
@@ -144,7 +148,6 @@ func is_no_colliders(pos, list):
 	var is_colliders = comape_lists(colliders_list, list)
 	if is_colliders:
 		falling_timer.start()
-		
 	return not is_colliders
 
 
