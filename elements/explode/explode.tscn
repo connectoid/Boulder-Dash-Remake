@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://ij1ea5oef51"]
+
+[ext_resource type="Texture2D" uid="uid://dnkintpbu1lmk" path="res://assets/textures/blue-tile-16.png" id="1_okks3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwfqf"]
+atlas = ExtResource("1_okks3")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8k8m2"]
+atlas = ExtResource("1_okks3")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v24j1"]
+atlas = ExtResource("1_okks3")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gqmi4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwfqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8k8m2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v24j1")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Explode" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_gqmi4")
+autoplay = "default"
+frame = 2
+frame_progress = 1.0
