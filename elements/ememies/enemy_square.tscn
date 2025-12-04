@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://dknpgsn0rcp0l"]
+
+[ext_resource type="Texture2D" uid="uid://dnkintpbu1lmk" path="res://assets/textures/blue-tile-16.png" id="1_yasha"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4momr"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aiv2h"]
+atlas = ExtResource("1_yasha")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpc65"]
+atlas = ExtResource("1_yasha")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gyof"]
+atlas = ExtResource("1_yasha")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_56u8m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aiv2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpc65")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gyof")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="EnemySquare" type="CharacterBody2D"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4momr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_56u8m")
+autoplay = "default"
+frame = 1
+frame_progress = 0.48061278

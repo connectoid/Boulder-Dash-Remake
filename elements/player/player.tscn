@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqkr5wm0x32gl"]
+[gd_scene load_steps=8 format=3 uid="uid://bqkr5wm0x32gl"]
 
 [ext_resource type="Texture2D" uid="uid://dnkintpbu1lmk" path="res://assets/textures/blue-tile-16.png" id="1_ktrpi"]
 [ext_resource type="Script" uid="uid://db12sy74xyoyb" path="res://elements/player/player.gd" id="1_lh3fu"]
+[ext_resource type="Texture2D" uid="uid://b3po3sn12jfy3" path="res://assets/textures/dude.png" id="2_lgvkd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lh3fu"]
 size = Vector2(16, 16)
@@ -36,7 +37,11 @@ script = ExtResource("1_lh3fu")
 shape = SubResource("RectangleShape2D_lh3fu")
 debug_color = Color(0.62240785, 0.53375584, 0, 0.41960785)
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lgvkd")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(5.9604645e-07, 0)
 sprite_frames = SubResource("SpriteFrames_338lt")
 animation = &"idle"

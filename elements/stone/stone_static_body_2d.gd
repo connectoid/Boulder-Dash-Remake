@@ -41,7 +41,8 @@ func _process(delta):
 	
 	if is_no_colliders(new_position, denied_colliders_list) && is_no_walls(new_position):
 		if not is_no_colliders(new_position, player_collider) and stone_is_falling:
-			kill_object($"../Player")
+			var object = get_objects_in_pos(new_position)[0].collider
+			kill_object(object)
 		if not falling_timer.is_stopped(): 
 			return 
 		vertical_dir.y += 1
@@ -94,7 +95,7 @@ func move(dir):
 		position = new_position
 
 
-func get_objects_in_pos(pos):
+func get_object_classes_in_pos(pos):
 	var direct_space_state = get_world_2d().direct_space_state
 	var point_query = PhysicsPointQueryParameters2D.new()
 	point_query.position = pos
@@ -103,6 +104,25 @@ func get_objects_in_pos(pos):
 	for object in objects:
 		results.append(object.collider.get_class())
 	return results
+
+
+func get_object_names_in_pos(pos):
+	var direct_space_state = get_world_2d().direct_space_state
+	var point_query = PhysicsPointQueryParameters2D.new()
+	point_query.position = pos
+	var objects = direct_space_state.intersect_point(point_query)
+	var results = []
+	for object in objects:
+		results.append(object.collider.name.split('2D')[0] + '2D')
+	return results
+
+
+func get_objects_in_pos(pos):
+	var direct_space_state = get_world_2d().direct_space_state
+	var point_query = PhysicsPointQueryParameters2D.new()
+	point_query.position = pos
+	var objects = direct_space_state.intersect_point(point_query)
+	return objects
 
 
 func comape_lists(source_list, dest_list):
@@ -120,11 +140,11 @@ func can_rolldown(pos):
 	var pos_below = Vector2(pos.x, pos.y + TILE_SIZE.y)
 	var pos_aside_left = Vector2(pos.x - TILE_SIZE.x, pos.y)
 	var pos_aside_right = Vector2(pos.x + TILE_SIZE.x, pos.y)
-	var collisions_below_aside_left = get_objects_in_pos(pos_below_aside_left)
-	var collisions_below_aside_right = get_objects_in_pos(pos_below_aside_right)
-	var collisions_below = get_objects_in_pos(pos_below)
-	var collisions_aside_left = get_objects_in_pos(pos_aside_left)
-	var collisions_aside_right = get_objects_in_pos(pos_aside_right)
+	var collisions_below_aside_left = get_object_classes_in_pos(pos_below_aside_left)
+	var collisions_below_aside_right = get_object_classes_in_pos(pos_below_aside_right)
+	var collisions_below = get_object_classes_in_pos(pos_below)
+	var collisions_aside_left = get_object_classes_in_pos(pos_aside_left)
+	var collisions_aside_right = get_object_classes_in_pos(pos_aside_right)
 	var is_empty_below_aside_left = not comape_lists(collisions_below_aside_left, all_colliders_list)
 	var is_empty_below_aside_right = not comape_lists(collisions_below_aside_right, all_colliders_list)
 	var is_stone_below = comape_lists(collisions_below, ['StaticBody2D'])
@@ -139,7 +159,7 @@ func can_rolldown(pos):
 
 
 func is_no_colliders(pos, list):
-	var colliders_list = get_objects_in_pos(pos)
+	var colliders_list = get_object_classes_in_pos(pos)
 	var is_colliders = comape_lists(colliders_list, list)
 	if is_colliders:
 		falling_timer.start()

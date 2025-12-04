@@ -1,10 +1,11 @@
+class_name Player
 extends CharacterBody2D
 
 const TILE_SIZE = Vector2(16, 16)
 var move_timer = Timer.new()
 var MOVE_INTERVAL = 0.2
 var window_size = Vector2.ZERO
-var WIN_GEMS_AMOUNT = 5
+var WIN_GEMS_AMOUNT = 2
 var gems_amount = 0
 
 
@@ -97,13 +98,12 @@ func check_position(pos, object_name):
 
 
 func eat_gem(object):
-	print(object)
 	gems_amount += 1
 	print('Gems amount: ', gems_amount)
 	#var gem = object.get('collider')
 	object.queue_free()
 	if gems_amount >= WIN_GEMS_AMOUNT:
-		print('YUO WIN !!!')
+		print('ALL GEMS COLLECTED!')
 
 
 func explode(pos):
@@ -116,7 +116,6 @@ func explode(pos):
 				if collider.name == 'GroundTileLayer':
 					dig_ground(expolde_position)
 				elif collider.get_class() == 'StaticBody2D':
-					print(collider)
 					var tween = get_tree().create_tween()
 					tween.tween_property(collider, "modulate:a", 0.0, 0.25)
 					tween.tween_callback(collider.queue_free)
